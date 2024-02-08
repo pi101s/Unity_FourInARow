@@ -38,7 +38,7 @@ public class Token : MonoBehaviour
         while (!FinalPositionHasBeenReached())
             yield return MoveOneStep();
 
-        _onPositionReachedHandler();
+        _onPositionReachedHandler?.Invoke();
         yield return null;
     }
 

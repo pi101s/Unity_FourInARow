@@ -1,50 +1,36 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Game : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap m_TileMap;
+    private BoardFactory _boardFactory;
 
     [SerializeField]
-    private Token m_Prefab;
+    private string _boardName;
 
     [SerializeField]
-    private BaseBoard _board;
+    private Token[] _tokens;
 
 
-    private int m_X = 0;
-    private int m_Y = 0;
+    private Board _board;
+    private byte m_X = 0;
 
     void Start()
     {
-        m_TileMap.CompressBounds();
-        m_X = m_TileMap.cellBounds.xMin;
-        m_Y = m_TileMap.cellBounds.yMin;
+        _board = _boardFactory.CreateBoard(_boardName);
+        _board.SetTokens(_tokens);
     }
 
     void Update()
     {
         if (Input.anyKeyDown)
         {
-            Vector3Int CellPosition = new(m_X, m_Y, 0);
+            if (m_X % 2 == 0)
+                _board.PlayToken(0, m_X);
+            else
+                _board.PlayToken(1, m_X);
 
-            if (m_TileMap.HasTile(CellPosition))
-            {
-                int TOKEN_SPAWN_COUNT = 1;
-                for (int i = 0; i < TOKEN_SPAWN_COUNT; ++i)
-                {
-                    byte x = (byte)(m_X - m_TileMap.cellBounds.xMin);
-                    _board.PlayToken(0, x);
-                }
-            }
-
-            ++m_X;
-            if (m_X >= m_TileMap.cellBounds.xMax)
-            {
-                m_X = m_TileMap.cellBounds.xMin;
-                ++m_Y;
-            }
+            m_X = (byte)((m_X + 1) % _board.GetGrid().width);
         }
     }
 }
