@@ -9,22 +9,22 @@ public abstract class Board : MonoBehaviour
     protected BoardCoordinate _lastPlayedCoordinate;
     protected Token[] _tokens;
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public BoardGrid GetGrid()
+    public BoardGrid grid
     {
-        return new BoardGrid(_grid, _width, _height);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get { return new BoardGrid(_grid, _width, _height); }
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void SetTokens(Token[] tokens)
+    public Token[] tokens
     {
-        _tokens = tokens;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        set { _tokens = value;}
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public BoardCoordinate GetLastPlayedCoordinate()
+    public BoardCoordinate lastPlayedCoordinate
     {
-        return _lastPlayedCoordinate;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get { return _lastPlayedCoordinate; }
     }
 
     public abstract void PlayToken(byte playerId, byte column);

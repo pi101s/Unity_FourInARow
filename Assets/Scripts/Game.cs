@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
     void Start()
     {
         _board = _boardFactory.CreateBoard(_boardName);
-        _board.SetTokens(_tokens);
+        _board.tokens = _tokens;
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class Game : MonoBehaviour
             else
                 _board.PlayToken(1, m_X);
 
-            m_X = (byte)((m_X + 1) % _board.GetGrid().width);
+            m_X = (byte)((m_X + 1) % _board.grid.width);
         }
     }
 }
