@@ -5,7 +5,7 @@ public class Token : MonoBehaviour
 {
     public delegate void OnPositionReachedHandler();
 
-    const float SECONDS_BETWEEN_STEPS = 0.01f;
+    static readonly float SECONDS_BETWEEN_STEPS = 0.01f;
 
     private Vector3 _initialPosition = Vector3.zero;
     private Vector3 _finalPosition = Vector3.zero;
