@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boardFactory: {fileID: 7650778752277027798, guid: df9987edc1bfe95e1919b89eab63502d, type: 3}
   _boardName: TileBoardRandom2
+  _shapeName: Shape2
   _tokens:
   - {fileID: 4310032678814499862, guid: f1bd17fbe63978c498c7242ddd6fc402, type: 3}
   - {fileID: 4310032678814499862, guid: 453685b7de1bbfb148152e83bb5210c6, type: 3}

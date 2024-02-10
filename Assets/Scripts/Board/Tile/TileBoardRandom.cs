@@ -7,10 +7,10 @@ public class TileBoardRandom : TileBoard
     {
         Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
 
-        byte newCol = (byte)(Mathf.Abs(column + (Random.value*6 - 3)) % _width);
+        byte newCol = (byte)(Mathf.Abs(column + (Random.value*6 - 3)) % width);
 
         byte nextAvailableRow = CalculateNextAvailableRow(newCol);
-        if (nextAvailableRow == _height)
+        if (nextAvailableRow == height)
             return;
 
         BoardCoordinate playedCoordinate = new(nextAvailableRow, newCol);

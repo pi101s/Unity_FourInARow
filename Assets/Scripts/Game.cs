@@ -9,6 +9,9 @@ public class Game : MonoBehaviour
     private string _boardName;
 
     [SerializeField]
+    private string _shapeName;
+
+    [SerializeField]
     private Token[] _tokens;
 
 
@@ -17,7 +20,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
-        _board = _boardFactory.CreateBoard(_boardName);
+        _board = _boardFactory.CreateBoard(new BoardConfig(_boardName, _shapeName));
         _board.tokens = _tokens;
     }
 

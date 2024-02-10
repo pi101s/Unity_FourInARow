@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class TileBoardDataBase
 {
-    private static readonly string FOLDER = "Board";
+    private static readonly string BOARDS_FOLDER = "Boards";
+    private static readonly string SHAPES_FOLDER = "Shapes";
     private static Object[] _boards = null;
+    private static Object[] _shapes = null;
 
     public static Board GetBoard(string name)
     {
         LoadBoards();
         return FindBoardByName(name);
+    }
+
+    public static BoardShape GetShape(string name)
+    {
+        LoadShapes();
+        return FindShapeByName(name);
     }
 
     private static Board FindBoardByName(string name) {
@@ -18,9 +26,20 @@ public class TileBoardDataBase
         return null;
     }
 
+    private static BoardShape FindShapeByName(string name) {
+        foreach (Object shape in _shapes)
+            if (shape.name == name)
+                return (BoardShape)shape;
+        return null;
+    }
+
     private static void LoadBoards()
     {
-        if (_boards == null)
-            _boards = Resources.LoadAll(FOLDER, typeof(Board));
+        _boards ??= Resources.LoadAll(BOARDS_FOLDER, typeof(Board));
+    }
+
+    private static void LoadShapes()
+    {
+        _shapes ??= Resources.LoadAll(SHAPES_FOLDER, typeof(BoardShape));
     }
 }
