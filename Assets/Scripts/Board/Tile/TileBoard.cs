@@ -6,11 +6,13 @@ public class TileBoard : Board
 {
     protected const byte BLOCKED_SPACE = 255;
     protected const byte EMPTY_SPACE = 254;
-    private const float TOKEN_SPEED = 20f;
     private const string FRAME_PREFIX = "frame";
 
     [SerializeField]
     private Tilemap _tileMap;
+
+    [SerializeField]
+    private float _speed = 25f;
 
     private readonly struct LocalCoordinate
     {
@@ -136,7 +138,7 @@ public class TileBoard : Board
         Token prefab = _tokens[playerId];
         Vector3 initialPosition = GetTokenInitialPosition(coordinate);
         Token newToken = Instantiate(prefab, initialPosition, Quaternion.identity, transform);
-        newToken.MoveTo(GetTokenFinalPosition(coordinate), TOKEN_SPEED);
+        newToken.MoveTo(GetTokenFinalPosition(coordinate), _speed);
         return newToken;
     }
 }

@@ -7,7 +7,6 @@ public class TileBoardFactory: BoardFactory
         Board board = TileBoardDataBase.GetBoard(name);
         if (board != null)
             return Instantiate(board, Vector3.zero, Quaternion.identity);
-
         return null;
     }
 }
