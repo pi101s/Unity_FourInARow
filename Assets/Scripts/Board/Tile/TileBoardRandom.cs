@@ -14,13 +14,7 @@ public class TileBoardRandom : TileBoard
             return;
 
         BoardCoordinate playedCoordinate = new(nextAvailableRow, newCol);
-        Token token = PlaceToken(playerId, playedCoordinate);
-        token.OnPositionReached(TokenPositionReachedHandler);
+        PlaceToken(playerId, playedCoordinate);
         UpdateState(playerId, playedCoordinate);
-    }
-
-    private void TokenPositionReachedHandler()
-    {
-        Debug.Log("Random Board token placed");
     }
 }

@@ -4,10 +4,16 @@ using UnityEngine;
 
 public abstract class Board : MonoBehaviour
 {
-    protected byte[,] _grid;
-    protected BoardCoordinate _lastPlayedCoordinate;
+    public delegate void OnTurnFinishedHandler();
+
+    protected static readonly byte BLOCKED_SPACE = 255;
+    protected static readonly byte EMPTY_SPACE = 254;
+
+    protected byte[,] _grid = null;
+    protected BoardCoordinate _lastPlayedCoordinate = new(0, 0);
     protected BoardShape _shape = null;
-    protected Token[] _tokens;
+    protected Token[] _tokens = null;
+    protected OnTurnFinishedHandler _onTurnFinishedHandler = null;
 
     public BoardShape shape
     {
@@ -24,6 +30,11 @@ public abstract class Board : MonoBehaviour
         _shape = shape;
         _grid = new byte[_shape.height, _shape.width];
         Reset();
+    }
+
+    public void OnTurnFinished(OnTurnFinishedHandler handler)
+    {
+        _onTurnFinishedHandler = handler;
     }
 
     protected byte width

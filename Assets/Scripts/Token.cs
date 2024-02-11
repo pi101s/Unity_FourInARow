@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Token : MonoBehaviour
 {
-    public delegate void OnPositionReachedHandler();
+    public delegate void OnFinishedMovingHandler();
 
     static readonly float SECONDS_BETWEEN_STEPS = 0.01f;
 
@@ -11,11 +11,11 @@ public class Token : MonoBehaviour
     private Vector3 _finalPosition = Vector3.zero;
     private float _motionTimeInSeconds = 0f;
     private float _startTimeInSeconds = 0f;
-    private OnPositionReachedHandler _onPositionReachedHandler;
+    private OnFinishedMovingHandler _onFinishedMovingHandler = null;
 
-    public void OnPositionReached(OnPositionReachedHandler handler)
+    public void OnFinishedMoving(OnFinishedMovingHandler handler)
     {
-        _onPositionReachedHandler = handler;
+        _onFinishedMovingHandler = handler;
     }
 
     public void MoveTo(Vector3 position, float speed)
@@ -38,7 +38,7 @@ public class Token : MonoBehaviour
         while (!FinalPositionHasBeenReached())
             yield return MoveOneStep();
 
-        _onPositionReachedHandler?.Invoke();
+        _onFinishedMovingHandler?.Invoke();
         yield return null;
     }
 

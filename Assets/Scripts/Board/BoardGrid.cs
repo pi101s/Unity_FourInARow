@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 public readonly struct BoardGrid {
     public readonly byte width;
     public readonly byte height;
@@ -9,7 +11,9 @@ public readonly struct BoardGrid {
         this.height = height;
     }
 
-    public byte GetValueOfCoordiante(BoardCoordinate coordinate) {
-        return _grid[coordinate.row, coordinate.column];
+    public byte this[byte row, byte column]
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get { return _grid[row, column]; }
     }
 }

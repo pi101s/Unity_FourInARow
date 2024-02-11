@@ -3,9 +3,6 @@ using UnityEngine.Assertions;
 
 public class TileBoard : Board
 {
-    protected const byte BLOCKED_SPACE = 255;
-    protected const byte EMPTY_SPACE = 254;
-
     [SerializeField]
     private float _speed = 25f;
 
@@ -76,6 +73,12 @@ public class TileBoard : Board
         Vector3 initialPosition = GetTokenInitialPosition(coordinate);
         Token newToken = Instantiate(prefab, initialPosition, Quaternion.identity, transform);
         newToken.MoveTo(GetTokenFinalPosition(coordinate), _speed);
+        newToken.OnFinishedMoving(OnTokenFinishedMoving);
         return newToken;
+    }
+
+    private void OnTokenFinishedMoving()
+    {
+        _onTurnFinishedHandler?.Invoke();
     }
 }
