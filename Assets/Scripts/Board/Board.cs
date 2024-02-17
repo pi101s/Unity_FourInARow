@@ -24,14 +24,14 @@ public abstract class Board : MonoBehaviour
         }
     }
 
-    public void Initialize(BoardShape shape)
+    public void Initialize(in BoardShape shape)
     {
         _shape = shape;
         _grid = new byte[_shape.height, _shape.width];
         Reset();
     }
 
-    public void OnTurnFinished(OnTurnFinishedHandler handler)
+    public void OnTurnFinished(in OnTurnFinishedHandler handler)
     {
         _onTurnFinishedHandler = handler;
     }
@@ -65,6 +65,6 @@ public abstract class Board : MonoBehaviour
         get { return _lastPlayedCoordinate; }
     }
 
-    public abstract void PlayToken(byte playerId, byte column);
+    public abstract void PlayToken(in byte playerId, in byte column);
     public abstract void Reset();
 }

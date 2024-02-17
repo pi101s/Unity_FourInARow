@@ -18,20 +18,20 @@ public class WinEvaluation
         return new WinEvaluationResult(winCombinations, winnerId, matchResult);
     }
 
-    public static WinEvaluationResult CreateWinEvaluationResult(WinCombination[] winCombinations)
+    public static WinEvaluationResult CreateWinEvaluationResult(in WinCombination[] winCombinations)
     {
         byte winnerId = CalculateWinner(winCombinations);
         EMatchResult matchResult = CalculateMatchResult(winCombinations);
         return new WinEvaluationResult(winCombinations, winnerId, matchResult);
     }
 
-    private static byte CalculateWinner(WinCombination[] winCombinations)
+    private static byte CalculateWinner(in WinCombination[] winCombinations)
     {
         int numberOfWinners = CalculateNumberOfWinners(winCombinations);
         return numberOfWinners == 1 ? winCombinations[0].winnerId : WinEvaluationResult.NO_WINNER;
     }
 
-    private static byte CalculateNumberOfWinners(WinCombination[] winCombinations)
+    private static byte CalculateNumberOfWinners(in WinCombination[] winCombinations)
     {
         HashSet<byte> winners = new();
         foreach (WinCombination winCombination in winCombinations)
@@ -39,7 +39,7 @@ public class WinEvaluation
         return (byte)winners.Count;
     }
 
-    private static EMatchResult CalculateMatchResult(WinCombination[] winCombinations)
+    private static EMatchResult CalculateMatchResult(in WinCombination[] winCombinations)
     {
         EMatchResult result = EMatchResult.NONE;
         if (CalculateWinner(winCombinations) != WinEvaluationResult.NO_WINNER)

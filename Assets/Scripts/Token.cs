@@ -13,12 +13,12 @@ public class Token : MonoBehaviour
     private float _startTimeInSeconds = 0f;
     private OnFinishedMovingHandler _onFinishedMovingHandler = null;
 
-    public void OnFinishedMoving(OnFinishedMovingHandler handler)
+    public void OnFinishedMoving(in OnFinishedMovingHandler handler)
     {
         _onFinishedMovingHandler = handler;
     }
 
-    public void MoveTo(Vector3 position, float speed)
+    public void MoveTo(in Vector3 position, in float speed)
     {
         _initialPosition = transform.position;
         _finalPosition = position;
@@ -27,7 +27,7 @@ public class Token : MonoBehaviour
         StartCoroutine(Move());
     }
 
-    private float CalculateMotionTime(float speed)
+    private float CalculateMotionTime(in float speed)
     {
         float distance = (_finalPosition - _initialPosition).magnitude;
         return distance / speed;

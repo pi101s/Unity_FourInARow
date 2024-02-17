@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TileBoardFactory: BoardFactory
 {
-    public override Board CreateBoard(BoardConfig config)
+    public override Board CreateBoard(in BoardConfig config)
     {
         Board board = TileBoardDataBase.GetBoard(config.boardName);
         if (board == null)
@@ -16,7 +16,7 @@ public class TileBoardFactory: BoardFactory
         return InstantiateBoard(board, shape);
     }
 
-    private Board InstantiateBoard(Board board, BoardShape shape)
+    private Board InstantiateBoard(in Board board, in BoardShape shape)
     {
         Board newBoard = Instantiate(board, Vector3.zero, Quaternion.identity);
         newBoard.shape = Instantiate(shape, Vector3.zero, Quaternion.identity);

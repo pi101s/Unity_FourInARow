@@ -13,7 +13,7 @@ public class TileBoard : Board
                 ResetCell(row, column);
     }
 
-    protected virtual void ResetCell(byte row, byte column)
+    protected virtual void ResetCell(in byte row, in byte column)
     {
         if (_shape.IsEmpty(new BoardCoordinate(row, column)))
             _grid[row, column] = EMPTY_SPACE;
@@ -21,23 +21,23 @@ public class TileBoard : Board
             _grid[row, column] = BLOCKED_SPACE;
     }
 
-    protected Vector3 GetTokenInitialPosition(BoardCoordinate coordinate)
+    protected Vector3 GetTokenInitialPosition(in BoardCoordinate coordinate)
     {
         return _shape.GetPosition(new BoardCoordinate(height, coordinate.column));
     }
 
-    protected Vector3 GetTokenFinalPosition(BoardCoordinate coordinate)
+    protected Vector3 GetTokenFinalPosition(in BoardCoordinate coordinate)
     {
         return _shape.GetPosition(coordinate);
     }
 
-    protected void UpdateState(byte playerId, BoardCoordinate playedCoordinate) {
+    protected void UpdateState(in byte playerId, in BoardCoordinate playedCoordinate) {
         _lastPlayedCoordinate = playedCoordinate;
         _grid[playedCoordinate.row, playedCoordinate.column] = playerId;
     }
 
 
-    public override void PlayToken(byte playerId, byte column)
+    public override void PlayToken(in byte playerId, in byte column)
     {
         Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
 
@@ -51,24 +51,24 @@ public class TileBoard : Board
         UpdateState(playerId, playedCoordinate);
     }
 
-    protected bool IsValidPlayerId(byte playerId)
+    protected bool IsValidPlayerId(in byte playerId)
     {
         return playerId != EMPTY_SPACE && playerId != BLOCKED_SPACE && playerId < _tokens.Length;
     }
 
-    protected byte CalculateNextAvailableRow(byte column)
+    protected byte CalculateNextAvailableRow(in byte column)
     {
         byte row;
         for (row = 0; row < height && !IsEmptySpace(new BoardCoordinate(row, column)); ++row) ;
         return row;
     }
 
-    protected bool IsEmptySpace(BoardCoordinate coordinate)
+    protected bool IsEmptySpace(in BoardCoordinate coordinate)
     {
         return _grid[coordinate.row, coordinate.column] == EMPTY_SPACE;
     }
 
-    protected Token PlaceToken(byte playerId, BoardCoordinate coordinate) {
+    protected Token PlaceToken(in byte playerId, in BoardCoordinate coordinate) {
         Token prefab = _tokens[playerId];
         Vector3 initialPosition = GetTokenInitialPosition(coordinate);
         Token newToken = Instantiate(prefab, initialPosition, Quaternion.identity, transform);

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class VerticalWinEvaluator : WinEvaluator
 {
-    public override WinEvaluationResult Evaluate(BoardGrid grid, byte lastTurnPlayer, byte maxPlayerId)
+    public override WinEvaluationResult Evaluate(in BoardGrid grid, in byte lastTurnPlayer, in byte maxPlayerId)
     {
         EvaluationData evaluationData = new()
         {
@@ -15,13 +15,13 @@ public class VerticalWinEvaluator : WinEvaluator
         return WinEvaluation.CreateWinEvaluationResult(evaluationData.winCombinations.ToArray());
     }
 
-    private void Evaluate(EvaluationData evaluationData)
+    private void Evaluate(in EvaluationData evaluationData)
     {
         for (evaluationData.column = 0; evaluationData.column < evaluationData.grid.width; ++evaluationData.column)
             EvaluateColumn(evaluationData);
     }
 
-    private void EvaluateColumn(EvaluationData evaluationData)
+    private void EvaluateColumn(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         evaluationData.tokensCount = 1;
@@ -35,7 +35,7 @@ public class VerticalWinEvaluator : WinEvaluator
             CreateWinCombination(evaluationData);
     }
 
-    private void EvaluateCell(EvaluationData evaluationData)
+    private void EvaluateCell(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         byte row = evaluationData.row;
@@ -49,7 +49,7 @@ public class VerticalWinEvaluator : WinEvaluator
             FinishEvaluatingPlayer(evaluationData);
     }
 
-    private void FinishEvaluatingPlayer(EvaluationData evaluationData)
+    private void FinishEvaluatingPlayer(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         byte row = evaluationData.row;
@@ -62,7 +62,7 @@ public class VerticalWinEvaluator : WinEvaluator
         evaluationData.tokensCount = 1;
     }
 
-    private void CreateWinCombination(EvaluationData evaluationData)
+    private void CreateWinCombination(in EvaluationData evaluationData)
     {
         byte tokensCount = evaluationData.tokensCount;
         byte row = evaluationData.row;

@@ -12,7 +12,7 @@ public readonly struct WinEvaluationResult
     public readonly byte winnerId;
     public readonly EMatchResult matchResult;
 
-    public WinEvaluationResult(WinCombination[] winCombinations, byte winnerId, EMatchResult matchResult)
+    public WinEvaluationResult(in WinCombination[] winCombinations, in byte winnerId, in EMatchResult matchResult)
     {
         this.winCombinations = winCombinations;
         this.winnerId = winnerId;
@@ -37,7 +37,7 @@ public readonly struct WinCombination
     public readonly byte winnerId;
     public readonly BoardCoordinate[] coordinates;
 
-    public WinCombination(byte winnerId, BoardCoordinate[] coordinates) {
+    public WinCombination(in byte winnerId, in BoardCoordinate[] coordinates) {
         this.winnerId = winnerId;
         this.coordinates = coordinates;
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WinEvaluatorFactory : MonoBehaviour
 {
-    public WinEvaluator CreateWinEvaluator(WinEvaluatorConfig config)
+    public WinEvaluator CreateWinEvaluator(in WinEvaluatorConfig config)
     {
         WinEvaluator winEvaluator = WinEvaluatorDatabase.GetWinEvaluator(config.name);
         WinEvaluator winEvaluatorInstance;

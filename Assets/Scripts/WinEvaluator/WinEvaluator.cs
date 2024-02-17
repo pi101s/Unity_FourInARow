@@ -27,6 +27,6 @@ public abstract class WinEvaluator : MonoBehaviour
         }
     }
 
-    public abstract WinEvaluationResult Evaluate(BoardGrid grid, byte lastTurnPlayer, byte maxPlayerId);
+    public abstract WinEvaluationResult Evaluate(in BoardGrid grid, in byte lastTurnPlayer, in byte maxPlayerId);
     protected virtual void OnTokenCountToWinSet() { }
 }

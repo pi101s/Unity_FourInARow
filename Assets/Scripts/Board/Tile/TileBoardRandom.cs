@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 public class TileBoardRandom : TileBoard
 {
-    public override void PlayToken(byte playerId, byte column)
+    public override void PlayToken(in byte playerId, in byte column)
     {
         Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
 

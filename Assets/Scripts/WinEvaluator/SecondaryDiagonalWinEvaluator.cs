@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class SecondaryDiagonalWinEvaluator : WinEvaluator
 {
-    public override WinEvaluationResult Evaluate(BoardGrid grid, byte lastTurnPlayer, byte maxPlayerId)
+    public override WinEvaluationResult Evaluate(in BoardGrid grid, in byte lastTurnPlayer, in byte maxPlayerId)
     {
         EvaluationData evaluationData = new()
         {
@@ -15,7 +15,7 @@ public class SecondaryDiagonalWinEvaluator : WinEvaluator
         return WinEvaluation.CreateWinEvaluationResult(evaluationData.winCombinations.ToArray());
     }
 
-    private void Evaluate(EvaluationData evaluationData)
+    private void Evaluate(in EvaluationData evaluationData)
     {
         for (byte column = (byte)(evaluationData.grid.width - 1); column < 255; --column)
         {
@@ -32,7 +32,7 @@ public class SecondaryDiagonalWinEvaluator : WinEvaluator
         }
     }
 
-    private void EvaluateDiagonal(EvaluationData evaluationData)
+    private void EvaluateDiagonal(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         evaluationData.tokensCount = 0;
@@ -48,7 +48,7 @@ public class SecondaryDiagonalWinEvaluator : WinEvaluator
             CreateWinCombination(evaluationData);
     }
 
-    private void EvaluateCell(EvaluationData evaluationData)
+    private void EvaluateCell(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         byte row = evaluationData.row;
@@ -62,7 +62,7 @@ public class SecondaryDiagonalWinEvaluator : WinEvaluator
             FinishEvaluatingPlayer(evaluationData);
     }
 
-    private void FinishEvaluatingPlayer(EvaluationData evaluationData)
+    private void FinishEvaluatingPlayer(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         byte row = evaluationData.row;
@@ -75,7 +75,7 @@ public class SecondaryDiagonalWinEvaluator : WinEvaluator
         evaluationData.tokensCount = 1;
     }
 
-    private void CreateWinCombination(EvaluationData evaluationData)
+    private void CreateWinCombination(in EvaluationData evaluationData)
     {
         byte tokensCount = evaluationData.tokensCount;
         byte column = evaluationData.column;
