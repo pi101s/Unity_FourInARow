@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ public abstract class Board : MonoBehaviour
             if (_shape == null)
                 Initialize(value);
             else
-                throw new NullReferenceException("The shape of a board cannot bet set more than once.");
+                throw new System.Exception("The shape of a board cannot bet set more than once.");
         }
     }
 

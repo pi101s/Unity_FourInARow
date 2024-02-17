@@ -2,8 +2,31 @@ using UnityEngine;
 
 public abstract class WinEvaluator : MonoBehaviour
 {
-    public static readonly byte NO_WINNER = 255;
-    protected static readonly byte NUMBER_OF_TOKENS_TO_WIN = 4;
+    private static readonly byte DEFAULT_TOKEN_COUNT_TO_WIN = 4;
+
+    private byte _tokenCountToWin = 0;
+    public byte tokenCountToWin
+    {
+        get
+        {
+            if (_tokenCountToWin == 0)
+                return DEFAULT_TOKEN_COUNT_TO_WIN;
+            else
+                return _tokenCountToWin;
+        }
+
+        set
+        {
+            if (_tokenCountToWin != 0)
+                throw new System.Exception("The token count to win of an evaluator cannot bet set more than once");
+            if (value == 0)
+                return;
+
+            _tokenCountToWin = value;
+            OnTokenCountToWinSet();
+        }
+    }
 
     public abstract WinEvaluationResult Evaluate(BoardGrid grid, byte lastTurnPlayer, byte maxPlayerId);
+    protected virtual void OnTokenCountToWinSet() { }
 }

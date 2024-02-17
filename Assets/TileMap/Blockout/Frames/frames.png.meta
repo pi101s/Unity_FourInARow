@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: frame_blockout_1
+      name: frame_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,20 +131,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4717dfd3aeace614a91d069f961c2735
-      internalID: -966335659
+      spriteID: c09f037ada830c24bab773e16532d00d
+      internalID: -1390979832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: frame_blockout_2
+      name: frame_1
       rect:
         serializedVersion: 2
         x: 0
@@ -152,20 +152,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3545875aabe674d4983a459b16dd07aa
-      internalID: -1412082623
+      spriteID: 263c6994d90ee6047b2a13d940a07c47
+      internalID: 1099851672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: frame_blockout_3
+      name: frame_2
       rect:
         serializedVersion: 2
         x: 0
@@ -173,20 +173,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 680e7e9447605a44ea949f00e75c3068
-      internalID: -677583790
+      spriteID: ccec38af3b969a544bdb1c8320ebb563
+      internalID: 1574396329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: frame_blockout_4
+      name: frame_3
       rect:
         serializedVersion: 2
         x: 0
@@ -194,14 +194,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db9170b5a9184ed4684405aecb82331c
-      internalID: -2003962095
+      spriteID: 7c2f2787bdf8d3b48a829f5c5259b813
+      internalID: -858367251
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      frame_blockout_1: -966335659
-      frame_blockout_2: -1412082623
-      frame_blockout_3: -677583790
-      frame_blockout_4: -2003962095
+      frame_0: -1390979832
+      frame_1: 1099851672
+      frame_2: 1574396329
+      frame_3: -858367251
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

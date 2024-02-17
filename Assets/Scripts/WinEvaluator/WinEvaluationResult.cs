@@ -1,25 +1,27 @@
-using System.Diagnostics;
 using System.Text;
 
-public enum EGameResult
+public enum EMatchResult
 {
     WIN, DRAW, NONE
 }
-
 public readonly struct WinEvaluationResult
 {
-    public readonly WinCombination[] winCombinations;
-    public readonly byte playerId;
+    public static readonly byte NO_WINNER = 255;
 
-    public WinEvaluationResult(WinCombination[] winCombinations, byte playerId)
+    public readonly WinCombination[] winCombinations;
+    public readonly byte winnerId;
+    public readonly EMatchResult matchResult;
+
+    public WinEvaluationResult(WinCombination[] winCombinations, byte winnerId, EMatchResult matchResult)
     {
         this.winCombinations = winCombinations;
-        this.playerId = playerId;
+        this.winnerId = winnerId;
+        this.matchResult = matchResult;
     }
 
     public override string ToString()
     {
-        StringBuilder sb = new($"Winner: {playerId}");
+        StringBuilder sb = new($"Winner: {winnerId}");
         sb.AppendLine();
         foreach (WinCombination winCombination in winCombinations)
         {
@@ -32,17 +34,17 @@ public readonly struct WinEvaluationResult
 
 public readonly struct WinCombination
 {
-    public readonly byte playerId;
+    public readonly byte winnerId;
     public readonly BoardCoordinate[] coordinates;
 
-    public WinCombination(byte playerId, BoardCoordinate[] coordinates) {
-        this.playerId = playerId;
+    public WinCombination(byte winnerId, BoardCoordinate[] coordinates) {
+        this.winnerId = winnerId;
         this.coordinates = coordinates;
     }
 
     public override string ToString()
     {
-        StringBuilder sb = new($"{playerId} - ");
+        StringBuilder sb = new($"{winnerId} - ");
         foreach (BoardCoordinate coordinate in coordinates)
             sb.Append($"({coordinate.row}, {coordinate.column}) ");
         sb.Remove(sb.Length - 1, 1);

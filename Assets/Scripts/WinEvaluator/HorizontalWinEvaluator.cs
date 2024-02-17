@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class VerticalWinEvaluator : WinEvaluator
+public class HorizontalWinEvaluator : WinEvaluator
 {
     public override WinEvaluationResult Evaluate(BoardGrid grid, byte lastTurnPlayer, byte maxPlayerId)
     {
@@ -17,19 +17,18 @@ public class VerticalWinEvaluator : WinEvaluator
 
     private void Evaluate(EvaluationData evaluationData)
     {
-        for (evaluationData.column = 0; evaluationData.column < evaluationData.grid.width; ++evaluationData.column)
-            EvaluateColumn(evaluationData);
+        for (evaluationData.row = 0; evaluationData.row < evaluationData.grid.height; ++evaluationData.row)
+            EvaluateRow(evaluationData);
     }
 
-    private void EvaluateColumn(EvaluationData evaluationData)
+    private void EvaluateRow(EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
         evaluationData.tokensCount = 1;
-        evaluationData.playerBeingEvaluated = grid[0, evaluationData.column];
+        evaluationData.playerBeingEvaluated = grid[evaluationData.row, 0];
 
-        for (evaluationData.row = 1; evaluationData.row < grid.height; ++evaluationData.row)
+        for (evaluationData.column = 1; evaluationData.column < grid.width; ++evaluationData.column)
             EvaluateCell(evaluationData);
-
 
         if (evaluationData.tokensCount >= tokenCountToWin)
             CreateWinCombination(evaluationData);
@@ -65,13 +64,13 @@ public class VerticalWinEvaluator : WinEvaluator
     private void CreateWinCombination(EvaluationData evaluationData)
     {
         byte tokensCount = evaluationData.tokensCount;
-        byte row = evaluationData.row;
         byte column = evaluationData.column;
+        byte row = evaluationData.row;
         byte player = evaluationData.playerBeingEvaluated;
 
         BoardCoordinate[] coordinates = new BoardCoordinate[tokensCount];
         for (byte i = 0; i < tokensCount; i++)
-            coordinates[i] = new BoardCoordinate((byte)(row - tokensCount + i), column);
+            coordinates[i] = new BoardCoordinate(row, (byte)(column - tokensCount + i));
         evaluationData.winCombinations.Add(new WinCombination(player, coordinates));
     }
 }

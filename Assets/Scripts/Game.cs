@@ -18,6 +18,9 @@ public class Game : MonoBehaviour
     private string _winEvaluatorName;
 
     [SerializeField]
+    private byte _tokenCountToWin;
+
+    [SerializeField]
     private Token[] _tokens;
 
 
@@ -28,7 +31,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
-        _winEvaluator = _winEvaluatorFactory.CreateWinEvaluator(new WinEvaluatorConfig(_winEvaluatorName));
+        _winEvaluator = _winEvaluatorFactory.CreateWinEvaluator(new WinEvaluatorConfig(_winEvaluatorName, _tokenCountToWin));
         _board = _boardFactory.CreateBoard(new BoardConfig(_boardName, _shapeName));
         _board.tokens = _tokens;
         _board.OnTurnFinished(CheckWin);
