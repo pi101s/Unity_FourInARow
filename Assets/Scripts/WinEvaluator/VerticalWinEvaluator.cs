@@ -2,13 +2,12 @@ using System.Collections.Generic;
 
 public class VerticalWinEvaluator : WinEvaluator
 {
-    public override WinEvaluationResult Evaluate(in BoardGrid grid, in byte lastTurnPlayer, in byte maxPlayerId)
+    public override WinEvaluationResult Evaluate(in BoardGrid grid, in int lastTurnPlayer)
     {
         EvaluationData evaluationData = new()
         {
             winCombinations = new List<WinCombination>(),
-            grid = grid,
-            maxPlayerId = maxPlayerId
+            grid = grid
         };
 
         Evaluate(evaluationData);
@@ -38,12 +37,11 @@ public class VerticalWinEvaluator : WinEvaluator
     private void EvaluateCell(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
-        byte row = evaluationData.row;
-        byte column = evaluationData.column;
-        byte maxPlayerId = evaluationData.maxPlayerId;
-        byte playerBeingEvaluateId = evaluationData.playerBeingEvaluated;
+        int row = evaluationData.row;
+        int column = evaluationData.column;
+        int playerBeingEvaluateId = evaluationData.playerBeingEvaluated;
 
-        if (grid[row, column] <= maxPlayerId && grid[row, column] == playerBeingEvaluateId)
+        if (grid[row, column] >= 0 && grid[row, column] == playerBeingEvaluateId)
             ++evaluationData.tokensCount;
         else
             FinishEvaluatingPlayer(evaluationData);
@@ -52,8 +50,8 @@ public class VerticalWinEvaluator : WinEvaluator
     private void FinishEvaluatingPlayer(in EvaluationData evaluationData)
     {
         BoardGrid grid = evaluationData.grid;
-        byte row = evaluationData.row;
-        byte column = evaluationData.column;
+        int row = evaluationData.row;
+        int column = evaluationData.column;
 
         if (evaluationData.tokensCount >= tokenCountToWin)
             CreateWinCombination(evaluationData);
@@ -64,14 +62,14 @@ public class VerticalWinEvaluator : WinEvaluator
 
     private void CreateWinCombination(in EvaluationData evaluationData)
     {
-        byte tokensCount = evaluationData.tokensCount;
-        byte row = evaluationData.row;
-        byte column = evaluationData.column;
-        byte player = evaluationData.playerBeingEvaluated;
+        int tokensCount = evaluationData.tokensCount;
+        int row = evaluationData.row;
+        int column = evaluationData.column;
+        int player = evaluationData.playerBeingEvaluated;
 
         BoardCoordinate[] coordinates = new BoardCoordinate[tokensCount];
-        for (byte i = 0; i < tokensCount; i++)
-            coordinates[i] = new BoardCoordinate((byte)(row - tokensCount + i), column);
+        for (int i = 0; i < tokensCount; i++)
+            coordinates[i] = new BoardCoordinate(row - tokensCount + i, column);
         evaluationData.winCombinations.Add(new WinCombination(player, coordinates));
     }
 }

@@ -25,8 +25,8 @@ public class TileBoardShape : BoardShape
         _tileMap.CompressBounds();
     }
 
-    public override byte width => (byte)_tileMap.size.x;
-    public override byte height => (byte)_tileMap.size.y;
+    public override int width => _tileMap.size.x;
+    public override int height => _tileMap.size.y;
 
     public override Vector3 GetPosition(in BoardCoordinate coordinate)
     {

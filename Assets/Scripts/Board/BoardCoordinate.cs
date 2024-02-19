@@ -1,9 +1,9 @@
 public readonly struct BoardCoordinate
 {
-    public readonly byte row;
-    public readonly byte column;
+    public readonly int row;
+    public readonly int column;
 
-    public BoardCoordinate(in byte row, in byte column)
+    public BoardCoordinate(in int row, in int column)
     {
         this.row = row;
         this.column = column;

@@ -1,17 +1,17 @@
 using System.Runtime.CompilerServices;
 
 public readonly struct BoardGrid {
-    public readonly byte width;
-    public readonly byte height;
-    private readonly byte[,] _grid;
+    public readonly int width;
+    public readonly int height;
+    private readonly int[,] _grid;
 
-    public BoardGrid(in byte[,] grid, in byte width, in byte height) {
+    public BoardGrid(in int[,] grid, in int width, in int height) {
         _grid = grid;
         this.width = width;
         this.height = height;
     }
 
-    public byte this[byte row, byte column]
+    public int this[int row, int column]
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get { return _grid[row, column]; }

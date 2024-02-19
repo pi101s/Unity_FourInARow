@@ -22,12 +22,12 @@ public class OfficialWinEvaluator : WinEvaluator
         _secondaryDiagonalEvaluator = Instantiate(_secondaryDiagonalEvaluator, transform);
     }
 
-    public override WinEvaluationResult Evaluate(in BoardGrid grid, in byte lastTurnPlayer, in byte maxPlayerId)
+    public override WinEvaluationResult Evaluate(in BoardGrid grid, in int lastTurnPlayer)
     {
-        WinEvaluationResult verticalEvaluationResult = _verticalEvaluator.Evaluate(grid, lastTurnPlayer, maxPlayerId);
-        WinEvaluationResult horizontalEvaluationResult = _horizontalEvaluator.Evaluate(grid, lastTurnPlayer, maxPlayerId);
-        WinEvaluationResult mainDiagonalEvaluationResult = _mainDiagonalEvaluator.Evaluate(grid, lastTurnPlayer, maxPlayerId);
-        WinEvaluationResult secondaryDiagonalEvaluationResult = _secondaryDiagonalEvaluator.Evaluate(grid, lastTurnPlayer, maxPlayerId);
+        WinEvaluationResult verticalEvaluationResult = _verticalEvaluator.Evaluate(grid, lastTurnPlayer);
+        WinEvaluationResult horizontalEvaluationResult = _horizontalEvaluator.Evaluate(grid, lastTurnPlayer);
+        WinEvaluationResult mainDiagonalEvaluationResult = _mainDiagonalEvaluator.Evaluate(grid, lastTurnPlayer);
+        WinEvaluationResult secondaryDiagonalEvaluationResult = _secondaryDiagonalEvaluator.Evaluate(grid, lastTurnPlayer);
         return WinEvaluation.CombineResults(verticalEvaluationResult, horizontalEvaluationResult, mainDiagonalEvaluationResult, secondaryDiagonalEvaluationResult);
     }
 

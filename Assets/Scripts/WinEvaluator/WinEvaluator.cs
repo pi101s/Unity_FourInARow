@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class WinEvaluator : MonoBehaviour
 {
-    private static readonly byte DEFAULT_TOKEN_COUNT_TO_WIN = 4;
+    private const int DEFAULT_TOKEN_COUNT_TO_WIN = 4;
 
-    private byte _tokenCountToWin = 0;
-    public byte tokenCountToWin
+    private int _tokenCountToWin = 0;
+    public int tokenCountToWin
     {
         get
         {
@@ -27,6 +27,6 @@ public abstract class WinEvaluator : MonoBehaviour
         }
     }
 
-    public abstract WinEvaluationResult Evaluate(in BoardGrid grid, in byte lastTurnPlayer, in byte maxPlayerId);
+    public abstract WinEvaluationResult Evaluate(in BoardGrid grid, in int lastTurnPlayer);
     protected virtual void OnTokenCountToWinSet() { }
 }

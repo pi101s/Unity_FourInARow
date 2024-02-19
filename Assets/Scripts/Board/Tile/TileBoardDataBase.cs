@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TileBoardDataBase
 {
-    private static readonly string BOARDS_FOLDER = "Boards";
-    private static readonly string SHAPES_FOLDER = "Shapes";
+    private const string BOARDS_FOLDER = "Boards";
+    private const string SHAPES_FOLDER = "Shapes";
     private static Object[] _boards = null;
     private static Object[] _shapes = null;
 

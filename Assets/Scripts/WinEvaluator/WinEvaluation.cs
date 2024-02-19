@@ -13,30 +13,30 @@ public class WinEvaluation
                 winCombinationsList.AddRange(evaluationResult.winCombinations);
 
         WinCombination[] winCombinations = winCombinationsList.ToArray();
-        byte winnerId = CalculateWinner(winCombinations);
+        int winnerId = CalculateWinner(winCombinations);
         EMatchResult matchResult = CalculateMatchResult(winCombinations);
         return new WinEvaluationResult(winCombinations, winnerId, matchResult);
     }
 
     public static WinEvaluationResult CreateWinEvaluationResult(in WinCombination[] winCombinations)
     {
-        byte winnerId = CalculateWinner(winCombinations);
+        int winnerId = CalculateWinner(winCombinations);
         EMatchResult matchResult = CalculateMatchResult(winCombinations);
         return new WinEvaluationResult(winCombinations, winnerId, matchResult);
     }
 
-    private static byte CalculateWinner(in WinCombination[] winCombinations)
+    private static int CalculateWinner(in WinCombination[] winCombinations)
     {
         int numberOfWinners = CalculateNumberOfWinners(winCombinations);
         return numberOfWinners == 1 ? winCombinations[0].winnerId : WinEvaluationResult.NO_WINNER;
     }
 
-    private static byte CalculateNumberOfWinners(in WinCombination[] winCombinations)
+    private static int CalculateNumberOfWinners(in WinCombination[] winCombinations)
     {
-        HashSet<byte> winners = new();
+        HashSet<int> winners = new();
         foreach (WinCombination winCombination in winCombinations)
             winners.Add(winCombination.winnerId);
-        return (byte)winners.Count;
+        return winners.Count;
     }
 
     private static EMatchResult CalculateMatchResult(in WinCombination[] winCombinations)

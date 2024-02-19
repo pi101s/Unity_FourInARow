@@ -6,13 +6,13 @@ public enum EMatchResult
 }
 public readonly struct WinEvaluationResult
 {
-    public static readonly byte NO_WINNER = 255;
+    public const int NO_WINNER = -1;
 
     public readonly WinCombination[] winCombinations;
-    public readonly byte winnerId;
+    public readonly int winnerId;
     public readonly EMatchResult matchResult;
 
-    public WinEvaluationResult(in WinCombination[] winCombinations, in byte winnerId, in EMatchResult matchResult)
+    public WinEvaluationResult(in WinCombination[] winCombinations, in int winnerId, in EMatchResult matchResult)
     {
         this.winCombinations = winCombinations;
         this.winnerId = winnerId;
@@ -34,10 +34,10 @@ public readonly struct WinEvaluationResult
 
 public readonly struct WinCombination
 {
-    public readonly byte winnerId;
+    public readonly int winnerId;
     public readonly BoardCoordinate[] coordinates;
 
-    public WinCombination(in byte winnerId, in BoardCoordinate[] coordinates) {
+    public WinCombination(in int winnerId, in BoardCoordinate[] coordinates) {
         this.winnerId = winnerId;
         this.coordinates = coordinates;
     }

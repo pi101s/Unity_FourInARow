@@ -5,10 +5,10 @@ public abstract class Board : MonoBehaviour
 {
     public delegate void OnTurnFinishedHandler();
 
-    protected static readonly byte BLOCKED_SPACE = 255;
-    protected static readonly byte EMPTY_SPACE = 254;
+    protected const int BLOCKED_SPACE = int.MinValue;
+    protected const int EMPTY_SPACE = int.MinValue + 1;
 
-    protected byte[,] _grid = null;
+    protected int[,] _grid = null;
     protected BoardCoordinate _lastPlayedCoordinate = new(0, 0);
     protected BoardShape _shape = null;
     protected Token[] _tokens = null;
@@ -27,7 +27,7 @@ public abstract class Board : MonoBehaviour
     public void Initialize(in BoardShape shape)
     {
         _shape = shape;
-        _grid = new byte[_shape.height, _shape.width];
+        _grid = new int[_shape.height, _shape.width];
         Reset();
     }
 
@@ -36,12 +36,12 @@ public abstract class Board : MonoBehaviour
         _onTurnFinishedHandler = handler;
     }
 
-    protected byte width
+    protected int width
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get { return _shape.width; }
     }
-    protected byte height
+    protected int height
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get { return _shape.height; }
@@ -65,6 +65,19 @@ public abstract class Board : MonoBehaviour
         get { return _lastPlayedCoordinate; }
     }
 
-    public abstract void PlayToken(in byte playerId, in byte column);
+    public abstract void PlayToken(in int playerId, in int column);
     public abstract void Reset();
+
+    protected virtual bool IsValidPlayerId(in int playerId)
+    {
+        return playerId >= 0
+            && playerId != EMPTY_SPACE
+            && playerId != BLOCKED_SPACE
+            && playerId < _tokens.Length;
+    }
+
+    protected virtual bool IsEmptySpace(in BoardCoordinate coordinate)
+    {
+        return _grid[coordinate.row, coordinate.column] == EMPTY_SPACE;
+    }
 }

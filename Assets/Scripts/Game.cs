@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
     private string _winEvaluatorName;
 
     [SerializeField]
-    private byte _tokenCountToWin;
+    private int _tokenCountToWin;
 
     [SerializeField]
     private Token[] _tokens;
@@ -26,8 +26,8 @@ public class Game : MonoBehaviour
 
     private Board _board;
     private WinEvaluator _winEvaluator;
-    private byte _x = 0;
-    private byte _lastPlayer = 0;
+    private int _x = 0;
+    private int _lastPlayer = 0;
 
     void Start()
     {
@@ -41,19 +41,19 @@ public class Game : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            if (_x % 2 == 0)
+            if (_x % 500 == 0)
                 _lastPlayer = 0;
             else
                 _lastPlayer = 1;
 
             _board.PlayToken(_lastPlayer, _x);
-            _x = (byte)((_x + 1) % _board.grid.width);
+            _x = (_x + 1) % _board.grid.width;
         }
     }
 
     private void CheckWin()
     {
-        WinEvaluationResult winResult = _winEvaluator.Evaluate(_board.grid, _lastPlayer, 1);
+        WinEvaluationResult winResult = _winEvaluator.Evaluate(_board.grid, _lastPlayer);
         if (winResult.winCombinations.Length > 0)
         {
             Debug.Log(winResult);

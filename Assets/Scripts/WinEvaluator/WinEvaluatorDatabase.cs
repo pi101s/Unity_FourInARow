@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WinEvaluatorDatabase
 {
-    private static readonly string WIN_EVALUATORS_FOLDER = "WinEvaluators";
+    private const string WIN_EVALUATORS_FOLDER = "WinEvaluators";
     private static Object[] _winEvaluators = null;
 
     public static WinEvaluator GetWinEvaluator(in string name)

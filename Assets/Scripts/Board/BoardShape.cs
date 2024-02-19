@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class BoardShape : MonoBehaviour
 {
-    public abstract byte width {get;}
-    public abstract byte height {get;}
+    public abstract int width {get;}
+    public abstract int height {get;}
 
     public abstract bool IsEmpty(in BoardCoordinate coordinate);
     public abstract Vector3 GetPosition(in BoardCoordinate coordinate);
