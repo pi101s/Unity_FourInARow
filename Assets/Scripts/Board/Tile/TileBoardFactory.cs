@@ -1,25 +1,46 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class TileBoardFactory: BoardFactory
+namespace FIAR
 {
-    public override Board CreateBoard(in BoardConfig config)
+    public class TileBoardFactory: BoardFactory
     {
-        Board board = TileBoardDataBase.GetBoard(config.boardName);
-        if (board == null)
-            throw new FileNotFoundException("Could not find the board " + config.boardName);
+        public override Board CreateBoard(in BoardConfig config)
+        {
+            Board board = GetBoard(config.boardName);
+            BoardShape shape = GetShape(config.shapeName);
+            Dictionary<int, Token> playersTokens = new();
+            foreach (var entry in config.playerTokenConfigDictionary)
+                playersTokens[entry.Key] = GetToken(entry.Value);
 
-        BoardShape shape = TileBoardDataBase.GetShape(config.shapeName);
-        if (shape == null)
-            throw new FileNotFoundException("Could not find the shape " + config.shapeName);
+            return InstantiateBoard(board, shape, playersTokens);
+        }
 
-        return InstantiateBoard(board, shape);
-    }
+        private Board GetBoard(string name)
+        {
+            Board board = TileBoardDataBase.GetBoard(name);
+            return board != null ? board : throw new FileNotFoundException("Could not find the board " + name);
+        }
 
-    private Board InstantiateBoard(in Board board, in BoardShape shape)
-    {
-        Board newBoard = Instantiate(board, Vector3.zero, Quaternion.identity);
-        newBoard.shape = Instantiate(shape, Vector3.zero, Quaternion.identity);
-        return newBoard;
+        private BoardShape GetShape(string name)
+        {
+            BoardShape shape = TileBoardDataBase.GetShape(name);
+            return shape != null ? shape : throw new FileNotFoundException("Could not find the shape " + name);
+        }
+
+        private Token GetToken(in TokenConfig tokenConfig)
+        {
+            Token token = TileBoardDataBase.GetToken(tokenConfig.name);
+            return token != null ? token : throw new FileNotFoundException("Could not find the token " + tokenConfig.name);
+        }
+
+        private Board InstantiateBoard(in Board board, in BoardShape shape, Dictionary<int, Token> playersTokens)
+        {
+            Board newBoard = Instantiate(board, Vector3.zero, Quaternion.identity);
+            newBoard.shape = Instantiate(shape, Vector3.zero, Quaternion.identity);
+            newBoard.playersTokens = playersTokens;
+            return newBoard;
+        }
     }
 }

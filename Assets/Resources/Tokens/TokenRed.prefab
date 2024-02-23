@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6341685851098403070}
   - component: {fileID: 3427002679529330453}
-  - component: {fileID: 4310032678814499862}
+  - component: {fileID: 419109167680204371}
   m_Layer: 0
   m_Name: TokenRed
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4310032678814499862
+--- !u!114 &419109167680204371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +94,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3526882911281889276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c0a1d34059d66419fb7d2eed9d2be1, type: 3}
+  m_Script: {fileID: 11500000, guid: ecfd929b154213c4cbab48b84af46511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

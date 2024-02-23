@@ -1,45 +1,34 @@
 using UnityEngine;
 
-public class Game : MonoBehaviour
+namespace FIAR
 {
-    [SerializeField]
-    private BoardFactory _boardFactory;
-
-    [SerializeField]
-    private WinEvaluatorFactory _winEvaluatorFactory;
-
-    [SerializeField]
-    private string _boardName;
-
-    [SerializeField]
-    private string _shapeName;
-
-    [SerializeField]
-    private string _winEvaluatorName;
-
-    [SerializeField]
-    private int _tokenCountToWin;
-
-    [SerializeField]
-    private Token[] _tokens;
-
-
-    private Board _board;
-    private WinEvaluator _winEvaluator;
-    private int _x = 0;
-    private int _lastPlayer = 0;
-
-    void Start()
+    public class Game : MonoBehaviour
     {
-        _winEvaluator = _winEvaluatorFactory.CreateWinEvaluator(new WinEvaluatorConfig(_winEvaluatorName, _tokenCountToWin));
-        _board = _boardFactory.CreateBoard(new BoardConfig(_boardName, _shapeName));
-        _board.tokens = _tokens;
-        _board.OnTurnFinished(CheckWin);
-    }
+        [SerializeField]
+        private BoardFactory _boardFactory;
 
-    void Update()
-    {
-        if (Input.anyKeyDown)
+        [SerializeField]
+        private WinEvaluatorFactory _winEvaluatorFactory;
+
+        private Board _board;
+        private WinEvaluator _winEvaluator;
+        private int _x = 0;
+        private int _lastPlayer = 0;
+
+        void Start()
+        {
+            _winEvaluator = _winEvaluatorFactory.CreateWinEvaluator(GameConfig.winEvaluatorConfig);
+            _board = _boardFactory.CreateBoard(GameConfig.boardConfig);
+            _board.OnTurnFinished(CheckWin);
+        }
+
+        void Update()
+        {
+            if (Input.anyKeyDown)
+                PlayToken();
+        }
+
+        private void PlayToken()
         {
             if (_x % 500 == 0)
                 _lastPlayer = 0;
@@ -49,14 +38,12 @@ public class Game : MonoBehaviour
             _board.PlayToken(_lastPlayer, _x);
             _x = (_x + 1) % _board.grid.width;
         }
-    }
 
-    private void CheckWin()
-    {
-        WinEvaluationResult winResult = _winEvaluator.Evaluate(_board.grid, _lastPlayer);
-        if (winResult.winCombinations.Length > 0)
+        private void CheckWin()
         {
-            Debug.Log(winResult);
+            WinEvaluationResult winResult = _winEvaluator.Evaluate(_board.grid, _lastPlayer);
+            if (winResult.winCombinations.Length > 0)
+                Debug.Log(winResult);
         }
     }
 }

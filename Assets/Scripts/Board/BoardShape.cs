@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public abstract class BoardShape : MonoBehaviour
+namespace FIAR
 {
-    public abstract int width {get;}
-    public abstract int height {get;}
+    public abstract class BoardShape : MonoBehaviour
+    {
+        public abstract int width {get;}
+        public abstract int height {get;}
 
-    public abstract bool IsEmpty(in BoardCoordinate coordinate);
-    public abstract Vector3 GetPosition(in BoardCoordinate coordinate);
+        public abstract bool IsEmpty(in BoardCoordinate coordinate);
+        public abstract Vector3 GetPosition(in BoardCoordinate coordinate);
+    }
 }

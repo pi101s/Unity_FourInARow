@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public abstract class BoardFactory: MonoBehaviour
+namespace FIAR
 {
-    public abstract Board CreateBoard(in BoardConfig config);
+    public abstract class BoardFactory: MonoBehaviour
+    {
+        public abstract Board CreateBoard(in BoardConfig config);
+    }
 }

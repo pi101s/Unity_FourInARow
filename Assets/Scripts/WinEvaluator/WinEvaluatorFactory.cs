@@ -1,18 +1,21 @@
 using System.IO;
 using UnityEngine;
 
-public class WinEvaluatorFactory : MonoBehaviour
+namespace FIAR
 {
-    public WinEvaluator CreateWinEvaluator(in WinEvaluatorConfig config)
+    public class WinEvaluatorFactory : MonoBehaviour
     {
-        WinEvaluator winEvaluator = WinEvaluatorDatabase.GetWinEvaluator(config.name);
-        WinEvaluator winEvaluatorInstance;
-        if (winEvaluator != null)
-            winEvaluatorInstance = Instantiate(winEvaluator, Vector3.zero, Quaternion.identity);
-        else
-            throw new FileNotFoundException("Could not find the win evaluator " + config.name);
+        public WinEvaluator CreateWinEvaluator(in WinEvaluatorConfig config)
+        {
+            WinEvaluator winEvaluator = WinEvaluatorDatabase.GetWinEvaluator(config.name);
+            WinEvaluator winEvaluatorInstance;
+            if (winEvaluator != null)
+                winEvaluatorInstance = Instantiate(winEvaluator, Vector3.zero, Quaternion.identity);
+            else
+                throw new FileNotFoundException("Could not find the win evaluator " + config.name);
 
-        winEvaluatorInstance.tokenCountToWin = config.tokenCountToWin;
-        return winEvaluatorInstance;
+            winEvaluatorInstance.tokenCountToWin = config.tokenCountToWin;
+            return winEvaluatorInstance;
+        }
     }
 }

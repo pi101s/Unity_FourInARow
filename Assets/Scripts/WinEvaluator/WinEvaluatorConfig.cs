@@ -1,11 +1,14 @@
-public readonly struct WinEvaluatorConfig
+namespace FIAR
 {
-    public readonly string name;
-    public readonly int tokenCountToWin;
-
-    public WinEvaluatorConfig(in string name, in int tokenCountToWin)
+    public readonly struct WinEvaluatorConfig
     {
-        this.name = name;
-        this.tokenCountToWin = tokenCountToWin;
+        public readonly string name;
+        public readonly int tokenCountToWin;
+
+        public WinEvaluatorConfig(in string name, in int tokenCountToWin)
+        {
+            this.name = name;
+            this.tokenCountToWin = tokenCountToWin;
+        }
     }
 }

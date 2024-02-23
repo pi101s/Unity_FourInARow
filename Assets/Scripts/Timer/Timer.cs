@@ -1,26 +1,29 @@
 using UnityEngine;
 
-public class Timer
+namespace FIAR
 {
-    private static float _startTime = 0f;
-
-    public static void Start()
+    public class Timer
     {
-        _startTime = Time.realtimeSinceStartup;
+        private static float _startTime = 0f;
+
+        public static void Start()
+        {
+            _startTime = Time.realtimeSinceStartup;
+        }
+
+        public static float ElapsedSeconds
+        {
+            get { return Time.realtimeSinceStartup - _startTime; }
+        }
+
+        public static float ElapsedMilliseconds
+        {
+            get { return ElapsedSeconds * 1000; }
+        }
+
+        public static float ElapsedMicroseconds
+        {
+            get { return ElapsedSeconds * 1000000; }
+        } 
     }
-
-    public static float ElapsedSeconds
-    {
-        get { return Time.realtimeSinceStartup - _startTime; }
-    }
-
-    public static float ElapsedMilliseconds
-    {
-        get { return ElapsedSeconds * 1000; }
-    }
-
-    public static float ElapsedMicroseconds
-    {
-        get { return ElapsedSeconds * 1000000; }
-    } 
 }

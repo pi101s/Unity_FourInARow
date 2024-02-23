@@ -1,68 +1,71 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileBoardShape : BoardShape
+namespace FIAR
 {
-    private const string FRAME_PREFIX = "frame";
-
-    private readonly struct LocalCoordinate
+    public class TileBoardShape : BoardShape
     {
-        public readonly int row;
-        public readonly int column;
+        private const string FRAME_PREFIX = "frame";
 
-        public LocalCoordinate(in int row, in int column)
+        private readonly struct LocalCoordinate
         {
-            this.row = row;
-            this.column = column;
+            public readonly int row;
+            public readonly int column;
+
+            public LocalCoordinate(in int row, in int column)
+            {
+                this.row = row;
+                this.column = column;
+            }
         }
-    }
 
-    [SerializeField]
-    private Tilemap _tileMap;
+        [SerializeField]
+        private Tilemap _tileMap;
 
-    void Awake()
-    {
-        _tileMap.CompressBounds();
-    }
+        void Awake()
+        {
+            _tileMap.CompressBounds();
+        }
 
-    public override int width => _tileMap.size.x;
-    public override int height => _tileMap.size.y;
+        public override int width => _tileMap.size.x;
+        public override int height => _tileMap.size.y;
 
-    public override Vector3 GetPosition(in BoardCoordinate coordinate)
-    {
-        LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
-        return _tileMap.GetCellCenterLocal(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
-    }
+        public override Vector3 GetPosition(in BoardCoordinate coordinate)
+        {
+            LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
+            return _tileMap.GetCellCenterLocal(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
+        }
 
-    public override bool IsEmpty(in BoardCoordinate coordinate)
-    {
-        return IsTile(coordinate) && IsFrame(coordinate);
-    }
+        public override bool IsEmpty(in BoardCoordinate coordinate)
+        {
+            return IsTile(coordinate) && IsFrame(coordinate);
+        }
 
-    private bool IsTile(in BoardCoordinate coordinate)
-    {
-        LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
-        return _tileMap.HasTile(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
-    }
+        private bool IsTile(in BoardCoordinate coordinate)
+        {
+            LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
+            return _tileMap.HasTile(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
+        }
 
-    private bool IsFrame(in BoardCoordinate coordinate) {
-        LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
-        TileBase tile = _tileMap.GetTile(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
-        return tile.name.ToLower().StartsWith(FRAME_PREFIX);
-    }
+        private bool IsFrame(in BoardCoordinate coordinate) {
+            LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
+            TileBase tile = _tileMap.GetTile(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
+            return tile.name.ToLower().StartsWith(FRAME_PREFIX);
+        }
 
-    private LocalCoordinate GetLocalCoordinate(in BoardCoordinate coordinate)
-    {
-        return new LocalCoordinate(GetLocalRow(coordinate.row), GetLocalColumn(coordinate.column));
-    }
+        private LocalCoordinate GetLocalCoordinate(in BoardCoordinate coordinate)
+        {
+            return new LocalCoordinate(GetLocalRow(coordinate.row), GetLocalColumn(coordinate.column));
+        }
 
-    private int GetLocalRow(in int row)
-    {
-        return _tileMap.cellBounds.min.y + row;
-    }
+        private int GetLocalRow(in int row)
+        {
+            return _tileMap.cellBounds.min.y + row;
+        }
 
-    private int GetLocalColumn(in int column)
-    {
-        return _tileMap.cellBounds.min.x + column;
+        private int GetLocalColumn(in int column)
+        {
+            return _tileMap.cellBounds.min.x + column;
+        }
     }
 }

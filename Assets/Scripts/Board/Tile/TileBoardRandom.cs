@@ -1,20 +1,23 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class TileBoardRandom : TileBoard
+namespace FIAR
 {
-    public override void PlayToken(in int playerId, in int column)
+    public class TileBoardRandom : TileBoard
     {
-        Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
+        public override void PlayToken(in int playerId, in int column)
+        {
+            Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
 
-        int newCol = (int)(Mathf.Abs(column + (Random.value*6 - 3)) % width);
+            int newCol = (int)(Mathf.Abs(column + (Random.value*6 - 3)) % width);
 
-        int nextAvailableRow = CalculateNextAvailableRow(newCol);
-        if (nextAvailableRow == height)
-            return;
+            int nextAvailableRow = CalculateNextAvailableRow(newCol);
+            if (nextAvailableRow == height)
+                return;
 
-        BoardCoordinate playedCoordinate = new(nextAvailableRow, newCol);
-        PlaceToken(playerId, playedCoordinate);
-        UpdateState(playerId, playedCoordinate);
+            BoardCoordinate playedCoordinate = new(nextAvailableRow, newCol);
+            PlaceToken(playerId, playedCoordinate);
+            UpdateState(playerId, playedCoordinate);
+        }
     }
 }
