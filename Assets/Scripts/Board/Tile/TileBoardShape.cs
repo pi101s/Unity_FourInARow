@@ -7,7 +7,7 @@ namespace FIAR
     {
         private const string FRAME_PREFIX = "frame";
 
-        private readonly struct LocalCoordinate
+        protected readonly struct LocalCoordinate
         {
             public readonly int row;
             public readonly int column;
@@ -53,7 +53,7 @@ namespace FIAR
             return tile.name.ToLower().StartsWith(FRAME_PREFIX);
         }
 
-        private LocalCoordinate GetLocalCoordinate(in BoardCoordinate coordinate)
+        protected LocalCoordinate GetLocalCoordinate(in BoardCoordinate coordinate)
         {
             return new LocalCoordinate(GetLocalRow(coordinate.row), GetLocalColumn(coordinate.column));
         }

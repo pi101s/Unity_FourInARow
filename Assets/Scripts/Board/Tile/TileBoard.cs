@@ -61,12 +61,12 @@ namespace FIAR
         }
 
         protected Token PlaceToken(in int playerId, in BoardCoordinate coordinate) {
-            Token prefab = _playersTokens[playerId];
+            Token token = _tokenFactory.CreateToken(_playersTokensConfig[playerId]);
             Vector3 initialPosition = GetTokenInitialPosition(coordinate);
-            Token newToken = Instantiate(prefab, initialPosition, Quaternion.identity, transform);
-            newToken.MoveTo(GetTokenFinalPosition(coordinate), _speed);
-            newToken.OnFinishedMoving(OnTokenFinishedMoving);
-            return newToken;
+            token.transform.position = initialPosition;
+            token.MoveTo(GetTokenFinalPosition(coordinate), _speed);
+            token.OnFinishedMoving(OnTokenFinishedMoving);
+            return token;
         }
 
         private void OnTokenFinishedMoving()

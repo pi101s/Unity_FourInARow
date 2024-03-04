@@ -10,11 +10,12 @@ namespace FIAR
 
         protected const int BLOCKED_SPACE = int.MinValue;
         protected const int EMPTY_SPACE = int.MinValue + 1;
+        protected TokenFactory _tokenFactory;
 
         protected int[,] _grid = null;
         protected BoardCoordinate _lastPlayedCoordinate = new(0, 0);
         protected BoardShape _shape = null;
-        protected Dictionary<int, Token> _playersTokens = null;
+        protected Dictionary<int, TokenConfig> _playersTokensConfig = null;
         protected OnTurnFinishedHandler _onTurnFinishedHandler = null;
 
         public BoardShape shape
@@ -27,7 +28,18 @@ namespace FIAR
             }
         }
 
-        public void Initialize(in BoardShape shape)
+        public TokenFactory tokenFactory
+        {
+            set
+            {
+                if (_tokenFactory == null)
+                    _tokenFactory = value;
+                else
+                    throw new System.Exception("The token factory of a board cannot bet set more than once.");
+            }
+        }
+
+        private void Initialize(in BoardShape shape)
         {
             _shape = shape;
             _grid = new int[_shape.height, _shape.width];
@@ -56,10 +68,10 @@ namespace FIAR
             get { return new BoardGrid(_grid, width, height); }
         }
 
-        public Dictionary<int, Token> playersTokens
+        public Dictionary<int, TokenConfig> playersTokensConfig
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set { _playersTokens = value;}
+            set { _playersTokensConfig = value;}
         }
 
         public BoardCoordinate lastPlayedCoordinate
@@ -70,7 +82,7 @@ namespace FIAR
 
         protected virtual bool IsValidPlayerId(in int playerId)
         {
-            return _playersTokens.ContainsKey(playerId);
+            return _playersTokensConfig.ContainsKey(playerId);
         }
 
         protected virtual bool IsEmptySpace(in BoardCoordinate coordinate)
