@@ -13,7 +13,8 @@ namespace FIAR
             return FindWinEvaluatorByName(name);
         }
 
-        private static WinEvaluator FindWinEvaluatorByName(in string name) {
+        private static WinEvaluator FindWinEvaluatorByName(in string name)
+        {
             foreach (Object winEvaluator in _winEvaluators)
                 if (winEvaluator.name == name)
                     return (WinEvaluator)winEvaluator;

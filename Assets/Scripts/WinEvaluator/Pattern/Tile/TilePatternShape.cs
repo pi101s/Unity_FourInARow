@@ -1,12 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace FIAR
 {
-    public class TileBoardShape : BoardShape
+    public class TilePatternShape : PatternShape
     {
-        private const string FRAME_PREFIX = "frame";
-
         protected readonly struct LocalCoordinate
         {
             public readonly int row;
@@ -19,6 +18,7 @@ namespace FIAR
             }
         }
 
+
         [SerializeField]
         private Tilemap _tileMap;
 
@@ -30,28 +30,27 @@ namespace FIAR
         public override int width => _tileMap.size.x;
         public override int height => _tileMap.size.y;
 
-        public override Vector3 GetPosition(in BoardCoordinate coordinate)
+        public override BoardCoordinate[] coodinates
         {
-            LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
-            return _tileMap.GetCellCenterLocal(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
+            get {
+                List<BoardCoordinate> coordinates = new();
+                for (int row = 0; row < height; row++)
+                    for (int column = 0; column < width; column++)
+                        if (IsInPattern(new BoardCoordinate(row, column)))
+                            coordinates.Add(new BoardCoordinate(row, column));
+                return coordinates.ToArray();
+            }
         }
 
-        public override bool IsEmpty(in BoardCoordinate coordinate)
+        public bool IsInPattern(in BoardCoordinate coordinate)
         {
-            return IsTile(coordinate) && IsFrame(coordinate);
+            return IsTile(coordinate);
         }
 
         private bool IsTile(in BoardCoordinate coordinate)
         {
             LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
             return _tileMap.HasTile(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
-        }
-
-        private bool IsFrame(in BoardCoordinate coordinate)
-        {
-            LocalCoordinate localCoordinate = GetLocalCoordinate(coordinate);
-            TileBase tile = _tileMap.GetTile(new Vector3Int(localCoordinate.column, localCoordinate.row, 0));
-            return tile.name.ToLower().StartsWith(FRAME_PREFIX);
         }
 
         protected LocalCoordinate GetLocalCoordinate(in BoardCoordinate coordinate)

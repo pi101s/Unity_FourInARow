@@ -8,6 +8,8 @@ namespace FIAR
         [SerializeField]
         private float _speed = 25f;
 
+        private bool _couldPlayToken = true;
+
         public override void Reset()
         {
             for (int row = 0; row < height; row++)
@@ -33,7 +35,13 @@ namespace FIAR
             return _shape.GetPosition(coordinate);
         }
 
-        protected void UpdateState(in int playerId, in BoardCoordinate playedCoordinate) {
+        public override bool CouldPlayToken()
+        {
+            return _couldPlayToken;
+        }
+
+        protected void UpdateState(in int playerId, in BoardCoordinate playedCoordinate)
+        {
             _lastPlayedCoordinate = playedCoordinate;
             _grid[playedCoordinate.row, playedCoordinate.column] = playerId;
         }
@@ -43,12 +51,13 @@ namespace FIAR
         {
             Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
 
+            _couldPlayToken = false;
             int nextAvailableRow = CalculateNextAvailableRow(column);
             if (nextAvailableRow == height)
                 return;
-
+                
+            _couldPlayToken = true;
             BoardCoordinate playedCoordinate = new(nextAvailableRow, column);
-
             PlaceToken(playerId, playedCoordinate);
             UpdateState(playerId, playedCoordinate);
         }
@@ -60,7 +69,8 @@ namespace FIAR
             return row;
         }
 
-        protected Token PlaceToken(in int playerId, in BoardCoordinate coordinate) {
+        protected Token PlaceToken(in int playerId, in BoardCoordinate coordinate)
+        {
             Token token = _tokenFactory.CreateToken(_playersTokensConfig[playerId]);
             Vector3 initialPosition = GetTokenInitialPosition(coordinate);
             token.transform.position = initialPosition;

@@ -20,7 +20,8 @@ namespace FIAR
 
         public BoardShape shape
         {
-            set {
+            set
+            {
                 if (_shape == null)
                     Initialize(value);
                 else
@@ -71,7 +72,7 @@ namespace FIAR
         public Dictionary<int, TokenConfig> playersTokensConfig
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set { _playersTokensConfig = value;}
+            set { _playersTokensConfig = value; }
         }
 
         public BoardCoordinate lastPlayedCoordinate
@@ -91,6 +92,7 @@ namespace FIAR
         }
 
         public abstract void PlayToken(in int playerId, in int column);
+        public abstract bool CouldPlayToken();
         public abstract void Reset();
     }
 }

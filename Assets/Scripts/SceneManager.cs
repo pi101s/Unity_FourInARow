@@ -14,7 +14,7 @@ namespace FIAR
             };
 
             GameConfig.boardConfig = new("TileBoard", "Shape", map);
-            GameConfig.winEvaluatorConfig = new("OfficialWinEvaluator", 4);
+            GameConfig.winEvaluatorConfig = new("PatternWinEvaluator", new string[] { "Horizontal", "Vertical" });
             UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FIAR
 {
-    public class TileBoardFactory: BoardFactory
+    public class TileBoardFactory : BoardFactory
     {
         public override Board CreateBoard(in BoardConfig config)
         {

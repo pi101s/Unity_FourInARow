@@ -24,6 +24,6 @@ namespace FIAR
         public static float ElapsedMicroseconds
         {
             get { return ElapsedSeconds * 1000000; }
-        } 
+        }
     }
 }

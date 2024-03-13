@@ -4,6 +4,8 @@ namespace FIAR
 {
     public class MainDiagonalWinEvaluator : WinEvaluator
     {
+        private const int TOKENS_TO_WIN = 4;
+
         public override WinEvaluationResult Evaluate(in BoardGrid grid, in int lastTurnPlayer)
         {
             EvaluationData evaluationData = new()
@@ -22,7 +24,7 @@ namespace FIAR
             {
                 evaluationData.row = row;
                 evaluationData.column = 0;
-                EvaluateDiagonal(evaluationData); 
+                EvaluateDiagonal(evaluationData);
             }
 
             for (int column = 0; column < evaluationData.grid.width; ++column)
@@ -45,7 +47,7 @@ namespace FIAR
              )
                 EvaluateCell(evaluationData);
 
-            if (evaluationData.tokensCount >= tokenCountToWin)
+            if (evaluationData.tokensCount >= TOKENS_TO_WIN)
                 CreateWinCombination(evaluationData);
         }
 
@@ -68,7 +70,7 @@ namespace FIAR
             int row = evaluationData.row;
             int column = evaluationData.column;
 
-            if (evaluationData.tokensCount >= tokenCountToWin)
+            if (evaluationData.tokensCount >= TOKENS_TO_WIN)
                 CreateWinCombination(evaluationData);
 
             evaluationData.playerBeingEvaluated = grid[row, column];

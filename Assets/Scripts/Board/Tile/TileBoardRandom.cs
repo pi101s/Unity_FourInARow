@@ -9,7 +9,7 @@ namespace FIAR
         {
             Assert.IsTrue(IsValidPlayerId(playerId), "Invalid player id playing a token");
 
-            int newCol = (int)(Mathf.Abs(column + (Random.value*6 - 3)) % width);
+            int newCol = (int)(Mathf.Abs(column + (Random.value * 6 - 3)) % width);
 
             int nextAvailableRow = CalculateNextAvailableRow(newCol);
             if (nextAvailableRow == height)

@@ -21,14 +21,16 @@ namespace FIAR
             return FindShapeByName(name);
         }
 
-        private static Board FindBoardByName(in string name) {
+        private static Board FindBoardByName(in string name)
+        {
             foreach (Object board in _boards)
                 if (board.name == name)
                     return (Board)board;
             return null;
         }
 
-        private static BoardShape FindShapeByName(in string name) {
+        private static BoardShape FindShapeByName(in string name)
+        {
             foreach (Object shape in _shapes)
                 if (shape.name == name)
                     return (BoardShape)shape;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FIAR
 {
-    public abstract class BoardFactory: MonoBehaviour
+    public abstract class BoardFactory : MonoBehaviour
     {
         [SerializeField]
         protected TokenFactory _tokenFactory;

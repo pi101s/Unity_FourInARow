@@ -32,13 +32,5 @@ namespace FIAR
             WinEvaluationResult secondaryDiagonalEvaluationResult = _secondaryDiagonalEvaluator.Evaluate(grid, lastTurnPlayer);
             return WinEvaluation.CombineResults(verticalEvaluationResult, horizontalEvaluationResult, mainDiagonalEvaluationResult, secondaryDiagonalEvaluationResult);
         }
-
-        protected override void OnTokenCountToWinSet()
-        {
-            _verticalEvaluator.tokenCountToWin = tokenCountToWin;
-            _horizontalEvaluator.tokenCountToWin = tokenCountToWin;
-            _mainDiagonalEvaluator.tokenCountToWin = tokenCountToWin;
-            _secondaryDiagonalEvaluator.tokenCountToWin = tokenCountToWin;
-        }
     }
 }

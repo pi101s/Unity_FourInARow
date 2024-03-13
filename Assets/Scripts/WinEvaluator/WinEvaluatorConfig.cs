@@ -3,12 +3,12 @@ namespace FIAR
     public readonly struct WinEvaluatorConfig
     {
         public readonly string name;
-        public readonly int tokenCountToWin;
+        public readonly string[] patterns;
 
-        public WinEvaluatorConfig(in string name, in int tokenCountToWin)
+        public WinEvaluatorConfig(in string name, in string[] patterns)
         {
             this.name = name;
-            this.tokenCountToWin = tokenCountToWin;
+            this.patterns = patterns;
         }
     }
 }

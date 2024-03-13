@@ -40,7 +40,8 @@ namespace FIAR
         public readonly int winnerId;
         public readonly BoardCoordinate[] coordinates;
 
-        public WinCombination(in int winnerId, in BoardCoordinate[] coordinates) {
+        public WinCombination(in int winnerId, in BoardCoordinate[] coordinates)
+        {
             this.winnerId = winnerId;
             this.coordinates = coordinates;
         }
